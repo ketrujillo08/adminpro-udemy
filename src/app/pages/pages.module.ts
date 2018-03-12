@@ -5,6 +5,8 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { Pages_Routes } from './pages.routes';
+import {FormsModule} from '@angular/forms';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
@@ -14,14 +16,16 @@ import { Pages_Routes } from './pages.routes';
         ProgressComponent,
         Graficas1Component,
         PagesComponent
+     
     ],
     exports:[
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
         PagesComponent
+        
     ],
-    imports:[SharedModule,Pages_Routes]
+    imports:[SharedModule,Pages_Routes,FormsModule,ComponentsModule]
 })
 
 export class PagesModule{}
