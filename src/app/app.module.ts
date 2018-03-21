@@ -17,12 +17,6 @@ import { ServiceModule } from './service/service.module';
 import { SettingsService } from './service/settings/settings.service';
 
 
-
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
