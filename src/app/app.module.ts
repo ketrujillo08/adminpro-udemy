@@ -12,7 +12,7 @@ import { RegisterComponent } from './register/register.component';
 
 import { PagesModule } from './pages/pages.module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceModule } from './service/service.module';
 import { SettingsService } from './service/settings/settings.service';
 
@@ -28,7 +28,8 @@ import { SettingsService } from './service/settings/settings.service';
     APP_ROUTES,
     PagesModule,
     FormsModule,
-    ServiceModule,
+    ReactiveFormsModule,
+    ServiceModule
   ],
   providers: [SettingsService],
   bootstrap: [AppComponent]
