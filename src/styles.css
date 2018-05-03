@@ -3,3 +3,9 @@
 #themecolors a {
     cursor: pointer;
 }
+
+.iw150 {
+    width: 150px;
+    display: block;
+    margin: auto;
+}

@@ -21,7 +21,7 @@ import { SettingsService } from './service/settings/settings.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,   
+    RegisterComponent 
   ],
   imports: [
     BrowserModule,

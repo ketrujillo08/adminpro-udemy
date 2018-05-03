@@ -7,11 +7,13 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 import { LoginGuardGuard } from '../service/service.index';
+import { ProfileComponent } from './profile/profile.component';
 
 const pagesRoutes:Routes = [
     {   path:'',component:PagesComponent,canActivate:[LoginGuardGuard],
         children:[
             {path:'dashboard',component:DashboardComponent,data:{titulo:'Dashboard'}},
+            {path:'profile',component:ProfileComponent,data:{titulo:'Perfil de usuario'}},
             {path:'progress',component:ProgressComponent,data:{titulo:'ProgressBars'}},
             {path:'graficas1',component:Graficas1Component,data:{titulo:'Graficas'}},
             {path:'promesas',component:PromesasComponent,data:{titulo:'Promesas'}},

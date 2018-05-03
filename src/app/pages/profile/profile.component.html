@@ -1,0 +1,63 @@
+<!-- Row -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value);" action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Person Info</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre</label>
+                                    <input [ngModel]="usuario.nombre" name="nombre" type="text" id="firstName" class="form-control" placeholder="Nombre de usuario" required>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">Correo</label>
+                                    <input [ngModel]="usuario.email" [disabled]="usuario.google" name="email" type="text" id="lastName" class="form-control" placeholder="Correo del usuario" required>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> Guardar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Fotografía</h3>
+                        <h6 class="card-subtitle">Nombre usuario</h6>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <img [src]="usuario.imagen | imagen" class="iw150" *ngIf="!imagenAux">
+                                    <img [src]="imagenAux" class="iw150" *ngIf="imagenAux">
+                                    <input (change)="seleccionImagen($event.target.files[0]);" type="file" id="firstName" class="form-control" placeholder="John doe">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <div class="form-actions">
+                            <button (click)="cambiarImagen();" [disabled]="!imagenSubir" type="button" class="btn btn-success"> <i class="fa fa-save"></i> Actualizar Foto</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
