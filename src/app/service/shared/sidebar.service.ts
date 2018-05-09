@@ -20,8 +20,8 @@ export class SidebarService {
       icono:'mdi mdi-folder-lock-open',
       subtitulos:[
         {titulo:'Usuarios',url:"/usuarios"},
-        {titulo:'Medicos'},
-        {titulo:'Hospitales'}
+        {titulo:'Medicos',url:"/medicos"},
+        {titulo:'Hospitales',url:"/hospitales"}
       ]
     }
   ];

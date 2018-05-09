@@ -1,0 +1,65 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="buscarMedico(input.value);" type="text" class="form-control" placeholder="Buscar Medico">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeInLeft" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Medicos registrados ( <small>{{totalRegistros}}</small> )</h3>
+                <div class="text-right">
+                    <button [routerLink]="['/medico','nuevo']" class="btn btn-themecolor">
+                    <i class="fa fa-plus"></i> Crear Médico
+                  </button>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Médico</th>
+                            <th>Hospital</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td>
+                                <img [src]="medico.img | imagen:'medico'" class="img-50 img-circle pointer">
+                            </td>
+                            <td>{{medico.nombre}}</td>
+                            <td>{{medico.hospital.nombre}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" [routerLink]="['/medico',medico._id]">
+                                    <i class="fa fa-save"></i>
+                                  </button>
+                                <button type="button" class="btn btn-danger" (click)="borrarMedico(medico);">
+                                    <i class="fa fa-trash-o"></i>
+                                  </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" (click)="cargarDesde(-5);" class="btn btn-secondary">Anteriores</button>
+                <button type="button" (click)="cargarDesde(5);" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>
