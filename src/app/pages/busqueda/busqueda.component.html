@@ -1,0 +1,101 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input type="text" class="form-control" placeholder="Buscar Hospital">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeInLeft" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Usuarios</h3>
+
+                <table class="table table-hover" *ngIf="usuarios.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios" routerLink="/usuarios">
+                            <td><img [src]="usuario.imagen | imagen" class="img-50 img-circle pointer"></td>
+                            <td><input [(ngModel)]="usuario.nombre" name="nombre" class="form-control"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="usuarios.length ===0">Sin registros</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Medicos</h3>
+
+                <table class="table table-hover" *ngIf="medicos.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medico of medicos">
+                            <td><img [src]="medico.img | imagen:'medico'" class="img-50 img-circle pointer"></td>
+                            <td><input [(ngModel)]="medico.nombre" name="nombre" class="form-control"></td>
+                            <td>
+                                <button type="button" class="btn btn-success" (click)="ir('medico',medico._id);">
+                                <i class="fa fa-save"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="medicos.length ===0">Sin registros</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Hospitales</h3>
+
+                <table class="table table-hover" *ngIf="hospitales.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitales" routerLink="/hospitales">
+                            <td><img [src]="hospital.img | imagen:'hospital'" class="img-50 img-circle pointer"></td>
+                            <td><input [(ngModel)]="hospital.nombre" name="nombre" class="form-control"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="hospitales.length ===0">Sin registros</div>
+            </div>
+        </div>
+    </div>
+</div>

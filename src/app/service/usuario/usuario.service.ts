@@ -5,11 +5,13 @@ import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class UsuarioService {
 
   usuario:Usuario;
   token : string;
+  menu : any = [];
   constructor(public _http:HttpClient, public _router:Router, public _subirArchivoService:SubirArchivoService) {
    this.cargarStorage();
   }
@@ -17,8 +19,10 @@ export class UsuarioService {
   logOut(){
     this.usuario = null;
     this.token = '';
+    this.menu = [];
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    localStorage.removeItem('menu');
     this._router.navigate(['/login']);
     
   }
@@ -31,9 +35,11 @@ export class UsuarioService {
      if(localStorage.getItem('token')){
        this.token = localStorage.getItem('token');
        this.usuario = JSON.parse(localStorage.getItem('usuario'));
+       this.menu = JSON.parse(localStorage.getItem('menu'));
      }else{
        this.token = '';
        this.usuario = null;
+       this.menu = null;
      }
    }
 
@@ -43,15 +49,22 @@ export class UsuarioService {
         .map((res:any)=>{
           swal('Usuario creado',res.usuario.email,'success');
           return res.usuario;
-        });
+        })
+        .catch(err =>{
+          swal(err.error.message,err.error.errors.message,'error');
+          return Observable.throw(err);
+          
+        })
    }
 
-   guardarStorage(id:string,token:string,usuario:Usuario){
+   guardarStorage(id:string,token:string,usuario:Usuario,menu?:any){
     localStorage.setItem('id',id);
     localStorage.setItem('token',token);
     localStorage.setItem('usuario',JSON.stringify(usuario));
+    localStorage.setItem('menu',JSON.stringify(menu));
     this.usuario = usuario;
     this.token = token;
+    this.menu = menu;
 
    }
 
@@ -59,7 +72,7 @@ export class UsuarioService {
      let url = URL_SERVICIOS + '/login/google';
      return this._http.post(url,{token:token})
      .map((res:any) =>{
-       this.guardarStorage(res.id,res.token,res.data.data);
+       this.guardarStorage(res.id,res.token,res.data.data,res.menu);
        return true;
      });
    }
@@ -73,8 +86,13 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
       let url = URL_SERVICIOS + '/login';
-      return this._http.post(url,usuario).map((res:any)=>{
-        this.guardarStorage(res.id,res.token,res.data.data);
+      return this._http.post(url,usuario)
+      .map((res:any)=>{
+        this.guardarStorage(res.id,res.token,res.data.data,res.menu);
+      })
+      .catch(err=>{
+        swal('Error en login',err.error.data.message,'error');
+        return Observable.throw(err);
       });
    }
 
