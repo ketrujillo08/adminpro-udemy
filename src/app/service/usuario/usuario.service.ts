@@ -3,6 +3,7 @@ import { Usuario } from '../../models/usuario.model';
 import {HttpClient} from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 import { Observable } from 'rxjs/Observable';
@@ -54,7 +55,7 @@ export class UsuarioService {
           swal(err.error.message,err.error.errors.message,'error');
           return Observable.throw(err);
           
-        })
+        });
    }
 
    guardarStorage(id:string,token:string,usuario:Usuario,menu?:any){
@@ -94,6 +95,24 @@ export class UsuarioService {
         swal('Error en login',err.error.data.message,'error');
         return Observable.throw(err);
       });
+   }
+   renuevaToken(){
+     let url = URL_SERVICIOS + '/login/renuevatoken';
+     url += '?token=' + this.token;
+     return this._http.get(url)
+       .map((res:any)=>{
+          this.token = res.token;
+          localStorage.setItem('token',this.token);
+          return true;
+       })
+       .catch(erro =>{
+
+        swal('Session perdida', 'No se pudo renovar su autentificación','error');
+        this._router.navigate(['/login']);
+  
+        return Observable.throw(erro);
+    
+       });
    }
 
    actualizar(usuario:Usuario){

@@ -6,7 +6,7 @@ import { Graficas1Component } from "./graficas1/graficas1.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
-import { LoginGuardGuard } from '../service/service.index';
+import { LoginGuardGuard,VerificaTokenGuard } from '../service/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
@@ -16,9 +16,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { AdminGuard } from '../service/guards/admin.guard';
 
 const pagesRoutes:Routes = [
-    {   path:'',component:PagesComponent,canActivate:[LoginGuardGuard],
-        children:[
-            {path:'dashboard',component:DashboardComponent,data:{titulo:'Dashboard'}},
+            {path:'dashboard',component:DashboardComponent,canActivate:[VerificaTokenGuard],data:{titulo:'Dashboard'}},
             {path:'profile',component:ProfileComponent,data:{titulo:'Perfil de usuario'}},
             {path:'busqueda/:termino',component:BusquedaComponent,data:{titulo:'Buscador'}},
             {path:'progress',component:ProgressComponent,data:{titulo:'ProgressBars'}},
@@ -32,8 +30,5 @@ const pagesRoutes:Routes = [
             {path:'medicos',component:MedicosComponent,data:{titulo:'Mantenimiento de medicos'}},
             {path:'medico/:id',component:MedicoComponent,data:{titulo:'Mantenimiento del medico'}},
             {path:'',redirectTo:'/dashboard',pathMatch:'full'}
-        ]
-
-    }
 ]
 export const Pages_Routes = RouterModule.forChild(pagesRoutes);

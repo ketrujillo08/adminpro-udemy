@@ -16,7 +16,6 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ModalUpComponent } from '../components/modal-up/modal-up.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
@@ -29,13 +28,11 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
-        PagesComponent,
         AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUpComponent,
         HospitalesComponent,
         MedicosComponent,
         MedicoComponent,
@@ -45,8 +42,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     exports:[
         DashboardComponent,
         ProgressComponent,
-        Graficas1Component,
-        PagesComponent
+        Graficas1Component
         
     ],
     imports:[SharedModule,Pages_Routes,FormsModule,ComponentsModule,PipesModule,CommonModule]
